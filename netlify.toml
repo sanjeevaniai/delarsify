@@ -1,9 +1,14 @@
 [build]
-  command = "npm install && npm run build"
+  command = "npm install && ./node_modules/.bin/vite build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "18"
+  NPM_CONFIG_PRODUCTION = "false"
+  NODE_ENV = "production"
+
+[build.processing]
+  skip_processing = false
 
 [[redirects]]
   from = "/*"
