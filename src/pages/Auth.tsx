@@ -659,8 +659,6 @@ const Auth = () => {
                 isSignUp ? "Sign Up" : "Sign In"
               )}
             </Button>
-          </form>
-
               <div className="mt-6 text-center">
                 <Button
                   variant="link"
