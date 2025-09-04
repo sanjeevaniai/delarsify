@@ -12,7 +12,7 @@ A comprehensive platform for managing Low Anterior Resection Syndrome (LARS) wit
 
 ## 🚀 Live Demo
 
-**Website**: [delars.sanjeevaniai.com](https://delars.sanjeevaniai.com)
+**Website**: [DeLARSify on Netlify](https://delarsify.netlify.app/)
 
 ## 🛠 Technology Stack
 
@@ -69,7 +69,7 @@ A comprehensive platform for managing Low Anterior Resection Syndrome (LARS) wit
 
 The application is automatically deployed on Netlify when changes are pushed to the main branch.
 
-**Live URL**: [delars.sanjeevaniai.com](https://delars.sanjeevaniai.com)
+**Live URL**: [DeLARSify on Netlify](https://delarsify.netlify.app/)
 **Build Command**: `npm run build`
 **Publish Directory**: `dist`
 

@@ -35,14 +35,110 @@ export interface KnowledgeDocument {
     confidence: number;
 }
 
+export interface PaperDocument {
+    id: string;
+    title: string;
+    authors: string[];
+    abstract: string;
+    fullText: string;
+    publicationDate: string;
+    journal: string;
+    doi: string;
+    keywords: string[];
+    extractedData: {
+        methodology: string;
+        findings: string[];
+        conclusions: string[];
+        recommendations: string[];
+        patientPopulation: string;
+        sampleSize: number;
+        studyType: 'RCT' | 'Cohort' | 'Case-Control' | 'Meta-Analysis' | 'Review' | 'Other';
+        evidenceLevel: 'High' | 'Medium' | 'Low';
+    };
+    embeddings?: number[];
+    lastUpdated: string;
+}
+
 class RAGService {
     private baseUrl: string;
     private apiKey: string;
+    private papers: PaperDocument[] = [];
 
     constructor() {
         // TODO: Replace with your actual RAG API endpoint
         this.baseUrl = process.env.REACT_APP_RAG_API_URL || 'https://api.delarsify.com/rag';
         this.apiKey = process.env.REACT_APP_RAG_API_KEY || '';
+        this.initializeSamplePapers();
+    }
+
+    private initializeSamplePapers() {
+        // Initialize with sample LARS research papers
+        this.papers = [
+            {
+                id: 'paper_001',
+                title: 'Low Anterior Resection Syndrome: A Systematic Review of Treatment Options',
+                authors: ['Smith, J.', 'Johnson, A.', 'Brown, K.'],
+                abstract: 'This systematic review examines the effectiveness of various treatment modalities for Low Anterior Resection Syndrome (LARS) in colorectal cancer survivors.',
+                fullText: 'Low Anterior Resection Syndrome (LARS) is a common complication following rectal cancer surgery...',
+                publicationDate: '2023-01-15',
+                journal: 'Colorectal Disease',
+                doi: '10.1111/codi.12345',
+                keywords: ['LARS', 'rectal cancer', 'bowel function', 'quality of life'],
+                extractedData: {
+                    methodology: 'Systematic review of 45 studies including 2,500+ patients',
+                    findings: [
+                        'Dietary modifications show 75% improvement in symptoms',
+                        'Pelvic floor exercises reduce urgency by 60%',
+                        'Probiotics improve microbiome diversity by 40%'
+                    ],
+                    conclusions: [
+                        'Multimodal approach most effective for LARS management',
+                        'Early intervention crucial for better outcomes'
+                    ],
+                    recommendations: [
+                        'Implement comprehensive LARS management protocols',
+                        'Focus on dietary and lifestyle interventions first'
+                    ],
+                    patientPopulation: 'Colorectal cancer survivors post-surgery',
+                    sampleSize: 2500,
+                    studyType: 'Meta-Analysis',
+                    evidenceLevel: 'High'
+                },
+                lastUpdated: '2023-01-15'
+            },
+            {
+                id: 'paper_002',
+                title: 'Microbiome Analysis in LARS Patients: A Prospective Cohort Study',
+                authors: ['Garcia, M.', 'Lee, S.', 'Wilson, R.'],
+                abstract: 'This study investigates the relationship between gut microbiome composition and LARS severity in 200 patients.',
+                fullText: 'The gut microbiome plays a crucial role in bowel function and may influence LARS development...',
+                publicationDate: '2023-03-20',
+                journal: 'Gut Microbes',
+                doi: '10.1080/19490976.2023.1234567',
+                keywords: ['microbiome', 'LARS', '16S rRNA', 'butyricicoccus'],
+                extractedData: {
+                    methodology: 'Prospective cohort study with 200 patients over 12 months',
+                    findings: [
+                        'Butyricicoccus levels correlate with LARS severity (r=0.85)',
+                        'Reduced diversity in frequency-dominant LARS patients',
+                        'Lactobacillus and Bifidobacterium levels significantly lower'
+                    ],
+                    conclusions: [
+                        'Microbiome composition strongly predicts LARS severity',
+                        'Probiotic interventions may be beneficial'
+                    ],
+                    recommendations: [
+                        'Include microbiome analysis in LARS assessment',
+                        'Consider targeted probiotic therapy'
+                    ],
+                    patientPopulation: 'LARS patients 6-24 months post-surgery',
+                    sampleSize: 200,
+                    studyType: 'Cohort',
+                    evidenceLevel: 'High'
+                },
+                lastUpdated: '2023-03-20'
+            }
+        ];
     }
 
     /**
@@ -294,6 +390,143 @@ Remember: You're not broken, you're building strength! 🌟 How can I best help 
             console.error('Recommendations Error:', error);
             return [];
         }
+    }
+
+    /**
+     * Add a new research paper to the knowledge base
+     */
+    async addPaper(paper: PaperDocument): Promise<void> {
+        try {
+            // Generate embeddings for the paper
+            const embeddings = await this.generateEmbeddings(paper);
+            paper.embeddings = embeddings;
+            
+            this.papers.push(paper);
+            console.log('Paper added successfully:', paper.title);
+        } catch (error) {
+            console.error('Failed to add paper:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Process and extract information from a PDF file
+     */
+    async processPaper(file: File): Promise<PaperDocument> {
+        try {
+            // Extract text from PDF
+            const text = await this.extractTextFromPDF(file);
+            
+            // Parse paper metadata
+            const metadata = await this.extractMetadata(text);
+            
+            // Extract structured data
+            const extractedData = await this.extractStructuredData(text);
+            
+            const paper: PaperDocument = {
+                id: `paper_${Date.now()}`,
+                title: metadata.title,
+                authors: metadata.authors,
+                abstract: metadata.abstract,
+                fullText: text,
+                publicationDate: metadata.publicationDate,
+                journal: metadata.journal,
+                doi: metadata.doi,
+                keywords: metadata.keywords,
+                extractedData,
+                lastUpdated: new Date().toISOString()
+            };
+
+            await this.addPaper(paper);
+            return paper;
+        } catch (error) {
+            console.error('Failed to process paper:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Search papers by query
+     */
+    async searchPapers(query: string, filters?: {
+        studyTypes?: string[];
+        evidenceLevels?: string[];
+        dateRange?: { start: string; end: string };
+    }): Promise<PaperDocument[]> {
+        let filteredPapers = this.papers;
+
+        if (filters) {
+            if (filters.studyTypes) {
+                filteredPapers = filteredPapers.filter(paper => 
+                    filters.studyTypes!.includes(paper.extractedData.studyType)
+                );
+            }
+            if (filters.evidenceLevels) {
+                filteredPapers = filteredPapers.filter(paper => 
+                    filters.evidenceLevels!.includes(paper.extractedData.evidenceLevel)
+                );
+            }
+        }
+
+        // Simple text search for now
+        const queryLower = query.toLowerCase();
+        return filteredPapers.filter(paper => 
+            paper.title.toLowerCase().includes(queryLower) ||
+            paper.abstract.toLowerCase().includes(queryLower) ||
+            paper.keywords.some(keyword => keyword.toLowerCase().includes(queryLower))
+        );
+    }
+
+    /**
+     * Get all papers
+     */
+    getPapers(): PaperDocument[] {
+        return [...this.papers];
+    }
+
+    /**
+     * Get paper count
+     */
+    getPaperCount(): number {
+        return this.papers.length;
+    }
+
+    private async generateEmbeddings(paper: PaperDocument): Promise<number[]> {
+        // Mock embedding generation - in production, use actual embedding service
+        const text = `${paper.title} ${paper.abstract} ${paper.extractedData.findings.join(' ')}`;
+        return Array.from({ length: 384 }, () => Math.random());
+    }
+
+    private async extractTextFromPDF(file: File): Promise<string> {
+        // Mock PDF text extraction - in production, use actual PDF parsing library
+        return "Mock extracted text from PDF...";
+    }
+
+    private async extractMetadata(text: string): Promise<any> {
+        // Mock metadata extraction - in production, use actual NLP parsing
+        return {
+            title: "Extracted Paper Title",
+            authors: ["Author 1", "Author 2"],
+            abstract: "Extracted abstract...",
+            publicationDate: "2023-01-01",
+            journal: "Journal Name",
+            doi: "10.1000/123456",
+            keywords: ["LARS", "research", "study"]
+        };
+    }
+
+    private async extractStructuredData(text: string): Promise<PaperDocument['extractedData']> {
+        // Mock structured data extraction - in production, use actual NLP
+        return {
+            methodology: "Extracted methodology",
+            findings: ["Finding 1", "Finding 2"],
+            conclusions: ["Conclusion 1", "Conclusion 2"],
+            recommendations: ["Recommendation 1", "Recommendation 2"],
+            patientPopulation: "Extracted population",
+            sampleSize: 100,
+            studyType: "RCT",
+            evidenceLevel: "High"
+        };
     }
 }
 

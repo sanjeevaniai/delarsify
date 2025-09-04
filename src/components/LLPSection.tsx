@@ -254,7 +254,8 @@ const LLPSection = () => {
                         LARS Likelihood Predictor (LLP)
                     </h2>
                     <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                        Advanced AI-powered tool that predicts LARS severity before surgery, enabling proactive treatment planning and personalized care strategies.
+                        Advanced AI-powered tool that predicts LARS severity before surgery, enabling proactive treatment planning and personalized care strategies. 
+                        Enhanced with comprehensive educational modules and evidence-based learning resources.
                     </p>
                 </div>
 
@@ -533,14 +534,137 @@ const LLPSection = () => {
                     </div>
                 </div>
 
-                {/* Information Alert */}
-                <Alert className="mt-8">
-                    <Info className="w-4 h-4" />
-                    <AlertDescription>
-                        <strong>Disclaimer:</strong> This tool provides risk estimates based on current research and should be used as a clinical decision support tool.
-                        Always consult with healthcare professionals for medical decisions. The algorithm is based on published research and may not account for all individual factors.
-                    </AlertDescription>
-                </Alert>
+                                    {/* Educational Modules Section */}
+                    <div className="mt-16">
+                        <h3 className="text-2xl font-bold text-center text-primary mb-8">Educational Learning Modules</h3>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <Card className="p-6">
+                                <div className="text-center mb-4">
+                                    <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                        <span className="text-2xl">📚</span>
+                                    </div>
+                                    <h4 className="font-semibold text-primary mb-2">Understanding LARS</h4>
+                                </div>
+                                <p className="text-sm text-muted-foreground mb-4">
+                                    Comprehensive guide to Low Anterior Resection Syndrome, its causes, symptoms, and impact on daily life.
+                                </p>
+                                <Button variant="outline" className="w-full">
+                                    Start Learning
+                                </Button>
+                            </Card>
+
+                            <Card className="p-6">
+                                <div className="text-center mb-4">
+                                    <div className="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                        <span className="text-2xl">🔬</span>
+                                    </div>
+                                    <h4 className="font-semibold text-primary mb-2">Risk Factors & Prevention</h4>
+                                </div>
+                                <p className="text-sm text-muted-foreground mb-4">
+                                    Learn about modifiable and non-modifiable risk factors, and strategies for risk reduction.
+                                </p>
+                                <Button variant="outline" className="w-full">
+                                    Start Learning
+                                </Button>
+                            </Card>
+
+                            <Card className="p-6">
+                                <div className="text-center mb-4">
+                                    <div className="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                        <span className="text-2xl">🏥</span>
+                                    </div>
+                                    <h4 className="font-semibold text-primary mb-2">Treatment Options</h4>
+                                </div>
+                                <p className="text-sm text-muted-foreground mb-4">
+                                    Explore surgical techniques, medical treatments, and rehabilitation approaches for LARS management.
+                                </p>
+                                <Button variant="outline" className="w-full">
+                                    Start Learning
+                                </Button>
+                            </Card>
+
+                            <Card className="p-6">
+                                <div className="text-center mb-4">
+                                    <div className="bg-yellow-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                        <span className="text-2xl">🍎</span>
+                                    </div>
+                                    <h4 className="font-semibold text-primary mb-2">Diet & Nutrition</h4>
+                                </div>
+                                <p className="text-sm text-muted-foreground mb-4">
+                                    Dietary strategies, nutritional guidelines, and microbiome health for LARS patients.
+                                </p>
+                                <Button variant="outline" className="w-full">
+                                    Start Learning
+                                </Button>
+                            </Card>
+
+                            <Card className="p-6">
+                                <div className="text-center mb-4">
+                                    <div className="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                        <span className="text-2xl">💪</span>
+                                    </div>
+                                    <h4 className="font-semibold text-primary mb-2">Quality of Life</h4>
+                                </div>
+                                <p className="text-sm text-muted-foreground mb-4">
+                                    Psychological support, coping strategies, and improving overall quality of life with LARS.
+                                </p>
+                                <Button variant="outline" className="w-full">
+                                    Start Learning
+                                </Button>
+                            </Card>
+
+                            <Card className="p-6">
+                                <div className="text-center mb-4">
+                                    <div className="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                        <span className="text-2xl">📊</span>
+                                    </div>
+                                    <h4 className="font-semibold text-primary mb-2">Research & Evidence</h4>
+                                </div>
+                                <p className="text-sm text-muted-foreground mb-4">
+                                    Latest research findings, clinical studies, and evidence-based practices in LARS management.
+                                </p>
+                                <Button variant="outline" className="w-full">
+                                    Start Learning
+                                </Button>
+                            </Card>
+                        </div>
+                    </div>
+
+                    {/* Learning Progress Section */}
+                    <div className="mt-16">
+                        <Card className="p-8">
+                            <div className="text-center mb-8">
+                                <h3 className="text-2xl font-bold text-primary mb-4">Your Learning Journey</h3>
+                                <p className="text-muted-foreground">
+                                    Track your progress through our comprehensive LARS education modules
+                                </p>
+                            </div>
+                            
+                            <div className="grid md:grid-cols-3 gap-6">
+                                <div className="text-center">
+                                    <div className="text-3xl font-bold text-primary mb-2">0/6</div>
+                                    <p className="text-sm text-muted-foreground">Modules Completed</p>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-3xl font-bold text-primary mb-2">0%</div>
+                                    <p className="text-sm text-muted-foreground">Overall Progress</p>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-3xl font-bold text-primary mb-2">0</div>
+                                    <p className="text-sm text-muted-foreground">Certificates Earned</p>
+                                </div>
+                            </div>
+                        </Card>
+                    </div>
+
+                    {/* Information Alert */}
+                    <Alert className="mt-8">
+                        <Info className="w-4 h-4" />
+                        <AlertDescription>
+                            <strong>Disclaimer:</strong> This tool provides risk estimates based on current research and should be used as a clinical decision support tool.
+                            Always consult with healthcare professionals for medical decisions. The algorithm is based on published research and may not account for all individual factors.
+                        </AlertDescription>
+                    </Alert>
             </div>
         </section>
     );
