@@ -15,25 +15,29 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/intake" element={<IntakeForm />} />
-          <Route path="/dashboard" element={<RoleBasedDashboard />} />
-          <Route path="/lars-ama" element={<LARSAMA />} />
-          <Route path="/llp" element={<LLP />} />
-          <Route path="/lars-manager" element={<LARSManager />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  console.log('App is rendering...');
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/intake" element={<IntakeForm />} />
+            <Route path="/dashboard" element={<RoleBasedDashboard />} />
+            <Route path="/lars-ama" element={<LARSAMA />} />
+            <Route path="/llp" element={<LLP />} />
+            <Route path="/lars-manager" element={<LARSManager />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

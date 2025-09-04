@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { supabase } from '@/integrations/supabase/client';
 import ChatInterface from '@/components/ChatInterface';
-import SimplePaperManagement from '@/components/SimplePaperManagement';
+// import SimplePaperManagement from '@/components/SimplePaperManagement';
 import { LogIn, Bot, LogOut, User, Database, MessageSquare, FileText } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import type { User as SupabaseUser } from '@supabase/supabase-js';
@@ -158,7 +158,10 @@ const LARSAMASection = () => {
                 </TabsContent>
 
                 <TabsContent value="papers">
-                  <SimplePaperManagement />
+                  <div className="p-8 text-center">
+                    <h3 className="text-xl font-semibold mb-4">Research Papers</h3>
+                    <p className="text-muted-foreground">Paper management interface coming soon...</p>
+                  </div>
                 </TabsContent>
               </Tabs>
             </div>

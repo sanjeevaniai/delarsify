@@ -66,8 +66,8 @@ class RAGService {
 
     constructor() {
         // TODO: Replace with your actual RAG API endpoint
-        this.baseUrl = process.env.REACT_APP_RAG_API_URL || 'https://api.delarsify.com/rag';
-        this.apiKey = process.env.REACT_APP_RAG_API_KEY || '';
+        this.baseUrl = import.meta.env.VITE_RAG_API_URL || 'https://api.delarsify.com/rag';
+        this.apiKey = import.meta.env.VITE_RAG_API_KEY || '';
         this.initializeSamplePapers();
     }
 
@@ -400,7 +400,7 @@ Remember: You're not broken, you're building strength! 🌟 How can I best help 
             // Generate embeddings for the paper
             const embeddings = await this.generateEmbeddings(paper);
             paper.embeddings = embeddings;
-            
+
             this.papers.push(paper);
             console.log('Paper added successfully:', paper.title);
         } catch (error) {
@@ -416,13 +416,13 @@ Remember: You're not broken, you're building strength! 🌟 How can I best help 
         try {
             // Extract text from PDF
             const text = await this.extractTextFromPDF(file);
-            
+
             // Parse paper metadata
             const metadata = await this.extractMetadata(text);
-            
+
             // Extract structured data
             const extractedData = await this.extractStructuredData(text);
-            
+
             const paper: PaperDocument = {
                 id: `paper_${Date.now()}`,
                 title: metadata.title,
@@ -457,12 +457,12 @@ Remember: You're not broken, you're building strength! 🌟 How can I best help 
 
         if (filters) {
             if (filters.studyTypes) {
-                filteredPapers = filteredPapers.filter(paper => 
+                filteredPapers = filteredPapers.filter(paper =>
                     filters.studyTypes!.includes(paper.extractedData.studyType)
                 );
             }
             if (filters.evidenceLevels) {
-                filteredPapers = filteredPapers.filter(paper => 
+                filteredPapers = filteredPapers.filter(paper =>
                     filters.evidenceLevels!.includes(paper.extractedData.evidenceLevel)
                 );
             }
@@ -470,7 +470,7 @@ Remember: You're not broken, you're building strength! 🌟 How can I best help 
 
         // Simple text search for now
         const queryLower = query.toLowerCase();
-        return filteredPapers.filter(paper => 
+        return filteredPapers.filter(paper =>
             paper.title.toLowerCase().includes(queryLower) ||
             paper.abstract.toLowerCase().includes(queryLower) ||
             paper.keywords.some(keyword => keyword.toLowerCase().includes(queryLower))
