@@ -1,88 +1,88 @@
-# DeLARSify - AI-Powered LARS Management System
+# DeLARSify - LARS Management Platform
 
-## Project Overview
+A comprehensive platform for managing Low Anterior Resection Syndrome (LARS) with AI-powered support and community features.
 
-DeLARSify uses a three-agent AI architecture to address LARS (Low Anterior Resection Syndrome) at multiple stages of care. The system provides continuous knowledge, predictive decision support, and personalized management through three specialized agents.
+## 🌟 Features
 
-## Three-Agent Architecture
+- **AI-Powered Chat**: SIA (Sweet Intelligent Assistant) provides evidence-based support
+- **Role-Based Access**: Separate experiences for survivors, caregivers, clinicians, and researchers
+- **LARS Management Tools**: Score calculator, symptom tracker, and management tools
+- **Community Support**: Safe space for sharing experiences and getting support
+- **Research Integration**: Access to latest research and evidence-based guidance
 
-### 1. LARS AMA Agent
-- Synthesizes evidence into patient- and clinician-friendly guidance
-- Transforms complex medical research into actionable recommendations
-- Provides accessible information for both patients and healthcare professionals
+## 🚀 Live Demo
 
-### 2. LARS Likelihood Predictor
-- Predicts probabilistic LARS severity pre-surgery
-- Uses advanced algorithms to assess risk factors
-- Enables proactive treatment planning
+**Website**: [delarsify.sanjeevaniai.com](https://delarsify.sanjeevaniai.com)
 
-### 3. LARS Manager
-- Continuously monitors patient progress
-- Integrates lifestyle and clinical data
-- Personalizes treatment recommendations
-- Provides ongoing support and management
+## 🛠 Technology Stack
 
-## Features
+- **Frontend**: React + TypeScript + Vite
+- **Styling**: Tailwind CSS + shadcn/ui
+- **Backend**: Supabase (Authentication & Database)
+- **Deployment**: Netlify
+- **AI Integration**: Agentic RAG (Retrieval-Augmented Generation)
 
-- Evidence synthesis and guidance
-- Pre-surgery risk prediction
-- Continuous monitoring and management
-- Personalized treatment recommendations
-- Clinical decision support tools
+## 🏗 Getting Started
 
-## Technologies Used
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/sanjeevaniai/delarsify.git
+   cd delarsify
+   ```
 
-This project is built with:
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-- Supabase (for backend services)
+3. **Set up environment variables**
+   - Copy `.env.example` to `.env.local`
+   - Add your Supabase credentials
 
-## Getting Started
+4. **Run development server**
+   ```bash
+   npm run dev
+   ```
 
-### Prerequisites
+## 👥 User Roles
 
-- Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Cancer Survivor**: Managing personal health journey
+- **Caregiver**: Supporting someone with LARS
+- **Clinician**: Providing healthcare services
+- **Researcher**: Conducting research in the field
 
-### Installation
+## 🔐 Authentication Flow
 
-```sh
-# Step 1: Clone the repository
-git clone <YOUR_GIT_URL>
+1. **Sign Up**: Choose role during registration
+2. **Email Verification**: Confirm email address
+3. **Profile Setup**: Complete intake form
+4. **Dashboard Access**: Role-based experience
 
-# Step 2: Navigate to the project directory
-cd s-ai-webpage-main
+## 📱 Available Routes
 
-# Step 3: Install the necessary dependencies
-npm install
+- `/` - Landing page
+- `/auth` - Sign up/Sign in with role selection
+- `/intake` - Profile setup form
+- `/dashboard` - Role-based dashboard
 
-# Step 4: Start the development server
-npm run dev
-```
+## 🚀 Deployment
 
-## Development
+The application is automatically deployed on Netlify when changes are pushed to the main branch.
 
-### Available Scripts
+**Build Command**: `npm run build`
+**Publish Directory**: `dist`
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-
-## Deployment
-
-The project can be deployed to any static hosting service that supports Vite builds.
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
 4. Submit a pull request
 
-## License
+## 📄 License
 
-This project is proprietary software for DeLARSify.
+This project is licensed under the MIT License.
+
+## 📞 Support
+
+For support, email support@sanjeevaniai.com or join our community at [SKOOL](https://www.skool.com/lets-delarsify/about?ref=31e315a378cf46bc851bf447eb51d738).
